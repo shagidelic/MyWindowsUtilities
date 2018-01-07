@@ -1,0 +1,47 @@
+﻿<Window x:Class="FileSearchUtility.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FileSearchUtility"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <DockPanel>
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.3*" />
+                <ColumnDefinition Width="0.7*" />                
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Label Content="Search Directory: " Grid.Row="0" Grid.Column="0"/>
+            <TextBox Name="txtSearchDirectory" Grid.Row="0" Grid.Column="1" />
+
+            <Label Content="File Search Pattern:" Grid.Row="1" Grid.Column="0"/>
+            <TextBox Name="txtFileSearchPattern" Grid.Row="1" Grid.Column="1"/>
+
+            <Label Content="Content Search Pattern:" Grid.Row="2" Grid.Column="0"/>
+            <TextBox Name="txtContentSearchPattern" Grid.Row="2" Grid.Column="1"/>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+            <Button Name="btnSearch" Content="Search" IsDefault="True" Click="btnSearch_Click" />
+        </StackPanel>
+        
+        <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
+            <CheckBox Name="chkTopOnly" IsChecked="False" Content="Search Top Directories Only"/>
+            <Label Name="lblMessages" />
+            <ProgressBar Name="progressBar" Minimum="0" Maximum="100" Height="20" IsEnabled="False"/>
+        </StackPanel>
+
+        <DataGrid Name="lstFoundFiles" ItemsSource="{Binding}" AutoGenerateColumns="False" ScrollViewer.VerticalScrollBarVisibility="Visible" >
+            <DataGrid.Columns>  
+                <DataGridTextColumn Binding="{Binding FilePath}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</Window>
